@@ -1,6 +1,9 @@
 const PASSWORD = "16112025";
 
-function cekPassword(){
+const API_URL =
+"https://script.google.com/macros/s/AKfycbxebYpT1laX8W2KkE8OFim1xrWK2FGCUNfA_ZlSGxdHolLI-CdxwrDOdZ5y5iLAWykaXw/exec";
+
+async function cekPassword(){
 
     const input =
     document.getElementById("password").value;
@@ -13,11 +16,69 @@ function cekPassword(){
         document.getElementById("mainPage")
         .classList.remove("hidden");
 
+        loadSurat();
+
     }else{
 
         document.getElementById("error")
         .innerText =
-        "💗 Petunjuk: kita jadian kapan ya?.";
+        "💗 Petunjuk: Hari dimana cerita kita dimulai.";
+
+    }
+
+}
+
+async function loadSurat(){
+
+    const container =
+    document.getElementById("suratContainer");
+
+    container.innerHTML =
+    "<p>💌 Membuka surat-surat...</p>";
+
+    try{
+
+        const response =
+        await fetch(API_URL);
+
+        const data =
+        await response.json();
+
+        if(data.length === 0){
+
+            container.innerHTML = `
+            <div class="surat">
+                <h3>💗</h3>
+                <p>
+                    Surat-surat untuk Kak Sasa
+                    sedang dikumpulkan 🌷
+                </p>
+            </div>
+            `;
+
+            return;
+        }
+
+        container.innerHTML = "";
+
+        data.reverse().forEach(item => {
+
+            container.innerHTML += `
+            <div class="surat">
+                <h3>💗 ${item.nama}</h3>
+                <p>${item.ucapan}</p>
+            </div>
+            `;
+
+        });
+
+    }catch(error){
+
+        container.innerHTML = `
+        <div class="surat">
+            <p>Gagal memuat surat 💔</p>
+        </div>
+        `;
 
     }
 

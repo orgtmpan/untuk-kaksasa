@@ -3,102 +3,97 @@ const PASSWORD = "06112025";
 const API_URL =
 "https://script.google.com/macros/s/AKfycbxebYpT1laX8W2KkE8OFim1xrWK2FGCUNfA_ZlSGxdHolLI-CdxwrDOdZ5y5iLAWykaXw/exec";
 
-async function cekPassword(){
-
-    alert("Tombol kepencet");
+async function cekPassword() {
 
     const input =
     document.getElementById("password").value;
 
+    if (input === PASSWORD) {
 
-const input =
-document.getElementById("password").value;
+        document.getElementById("passwordPage")
+        .style.display = "none";
 
-if(input === PASSWORD){
+        document.getElementById("mainPage")
+        .classList.remove("hidden");
 
-    document.getElementById("passwordPage")
-    .style.display = "none";
+        loadSurat();
 
-    document.getElementById("mainPage")
-    .classList.remove("hidden");
+    } else {
 
-    loadSurat();
+        document.getElementById("error")
+        .innerText =
+        "💗 Petunjuk: tanggal, bulan, tahun jadian.";
 
-}else{
-
-    document.getElementById("error")
-    .innerText =
-    "💗 Petunjuk: tanggal, bulan,tahun jadian.";
+    }
 
 }
 
-```
-}
+async function loadSurat() {
 
-async function loadSurat(){
+    const container =
+    document.getElementById("suratContainer");
 
-```
-const container =
-document.getElementById("suratContainer");
+    if (!container) return;
 
-container.innerHTML =
-"<p>💌 Membuka surat-surat...</p>";
+    container.innerHTML =
+    "<p>💌 Membuka surat-surat...</p>";
 
-try{
+    try {
 
-    const response =
-    await fetch(API_URL);
+        const response =
+        await fetch(API_URL);
 
-    const data =
-    await response.json();
+        const data =
+        await response.json();
 
-    if(data.length === 0){
+        if (data.length === 0) {
+
+            container.innerHTML = `
+            <div class="surat">
+                <h3>💗</h3>
+                <p>
+                    Surat-surat untuk Kak Sasa
+                    sedang dikumpulkan 🌷
+                </p>
+            </div>
+            `;
+
+            return;
+        }
+
+        container.innerHTML = "";
+
+        data.reverse().forEach(item => {
+
+            container.innerHTML += `
+            <div class="surat">
+                <h3>💗 ${item.nama}</h3>
+                <p>${item.ucapan}</p>
+            </div>
+            `;
+
+        });
+
+    } catch (error) {
 
         container.innerHTML = `
         <div class="surat">
-            <h3>💗</h3>
-            <p>
-                Surat-surat untuk Kak Sasa
-                sedang dikumpulkan 🌷
-            </p>
+            <p>Gagal memuat surat 💔</p>
         </div>
         `;
 
-        return;
+        console.error(error);
+
     }
 
-    container.innerHTML = "";
-
-    data.reverse().forEach(item => {
-
-        container.innerHTML += `
-        <div class="surat">
-            <h3>💗 ${item.nama}</h3>
-            <p>${item.ucapan}</p>
-        </div>
-        `;
-
-    });
-
-}catch(error){
-
-    container.innerHTML = `
-    <div class="surat">
-        <p>Gagal memuat surat 💔</p>
-    </div>
-    `;
-
-}
-```
-
 }
 
-function createHeart(){
+function createHeart() {
 
     const heartsContainer =
     document.querySelector(".hearts");
 
-    if(!heartsContainer) return;
+    if (!heartsContainer) return;
 
     const heart =
     document.createElement("div");
@@ -114,11 +109,12 @@ function createHeart(){
     setTimeout(() => {
         heart.remove();
     }, 8000);
+
 }
 
 setInterval(createHeart, 500);
 
-function bukaSurat(){
+function bukaSurat() {
 
     document
     .getElementById("suratRahasia")
@@ -136,48 +132,46 @@ function bukaSurat(){
 
 }
 
-function updateCountdown(){
+function updateCountdown() {
 
-```
-const target =
-new Date("2026-06-14 00:00:00");
+    const target =
+    new Date("2026-06-14T00:00:00");
 
-const now =
-new Date();
+    const now =
+    new Date();
 
-const diff =
-target - now;
+    const diff =
+    target - now;
 
-if(diff <= 0){
+    if (diff <= 0) {
+
+        document
+        .getElementById("countdown")
+        .innerHTML =
+        "🎉 Selamat Ulang Tahun Kak Sasa! 🎂💗";
+
+        return;
+
+    }
+
+    const days =
+    Math.floor(diff / (1000 * 60 * 60 * 24));
+
+    const hours =
+    Math.floor((diff / (1000 * 60 * 60)) % 24);
+
+    const minutes =
+    Math.floor((diff / (1000 * 60)) % 60);
+
+    const seconds =
+    Math.floor((diff / 1000) % 60);
 
     document
     .getElementById("countdown")
     .innerHTML =
-    "🎉 Selamat Ulang Tahun Kak Sasa! 🎂💗";
-
-    return;
-}
-
-const days =
-Math.floor(diff / (1000 * 60 * 60 * 24));
-
-const hours =
-Math.floor((diff / (1000 * 60 * 60)) % 24);
-
-const minutes =
-Math.floor((diff / (1000 * 60)) % 60);
-
-const seconds =
-Math.floor((diff / 1000) % 60);
-
-document
-.getElementById("countdown")
-.innerHTML =
-`🎂 ${days} Hari ${hours} Jam ${minutes} Menit ${seconds} Detik`;
-```
+    `🎂 ${days} Hari ${hours} Jam ${minutes} Menit ${seconds} Detik`;
 
 }
 
 setInterval(updateCountdown, 1000);
-
 updateCountdown();

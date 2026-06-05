@@ -121,3 +121,13 @@ setTimeout(() => {
 }
 
 setInterval(createHeart, 500);
+
+function bukaSurat(){
+
+```
+document
+.getElementById("suratRahasia")
+.classList.remove("hidden");
+```
+
+}

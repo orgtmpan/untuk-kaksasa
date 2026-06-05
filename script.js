@@ -90,34 +90,25 @@ try{
 
 function createHeart(){
 
-```
-const heart =
-document.createElement("div");
+    const heartsContainer =
+    document.querySelector(".hearts");
 
-heart.classList.add("heart");
+    if(!heartsContainer) return;
 
-heart.innerHTML = "💗";
+    const heart =
+    document.createElement("div");
 
-heart.style.left =
-Math.random() * 100 + "vw";
+    heart.classList.add("heart");
+    heart.innerHTML = "💗";
 
-heart.style.fontSize =
-(15 + Math.random() * 20) + "px";
+    heart.style.left =
+    Math.random() * 100 + "vw";
 
-heart.style.animationDuration =
-(3 + Math.random() * 5) + "s";
+    heartsContainer.appendChild(heart);
 
-document
-.querySelector(".hearts")
-.appendChild(heart);
-
-setTimeout(() => {
-
-    heart.remove();
-
-}, 8000);
-```
-
+    setTimeout(() => {
+        heart.remove();
+    }, 8000);
 }
 
 setInterval(createHeart, 500);

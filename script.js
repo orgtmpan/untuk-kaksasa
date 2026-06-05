@@ -1,4 +1,4 @@
-const PASSWORD = "16112025";
+const PASSWORD = "06112025";
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbxebYpT1laX8W2KkE8OFim1xrWK2FGCUNfA_ZlSGxdHolLI-CdxwrDOdZ5y5iLAWykaXw/exec";

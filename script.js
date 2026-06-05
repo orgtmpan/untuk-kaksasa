@@ -5,108 +5,118 @@ const API_URL =
 
 async function cekPassword(){
 
-    const input =
-    document.getElementById("password").value;
+```
+const input =
+document.getElementById("password").value;
 
-    if(input === PASSWORD){
+if(input === PASSWORD){
 
-        document.getElementById("passwordPage")
-        .style.display = "none";
+    document.getElementById("passwordPage")
+    .style.display = "none";
 
-        document.getElementById("mainPage")
-        .classList.remove("hidden");
+    document.getElementById("mainPage")
+    .classList.remove("hidden");
 
-        loadSurat();
+    loadSurat();
 
-    }else{
+}else{
 
-        document.getElementById("error")
-        .innerText =
-        "💗 Petunjuk: Hari dimana cerita kita dimulai.";
+    document.getElementById("error")
+    .innerText =
+    "💗 Petunjuk: tanggal, bulan,tahun jadian.";
 
-    }
+}
+```
 
 }
 
 async function loadSurat(){
 
-    const container =
-    document.getElementById("suratContainer");
+```
+const container =
+document.getElementById("suratContainer");
 
-    container.innerHTML =
-    "<p>💌 Membuka surat-surat...</p>";
+container.innerHTML =
+"<p>💌 Membuka surat-surat...</p>";
 
-    try{
+try{
 
-        const response =
-        await fetch(API_URL);
+    const response =
+    await fetch(API_URL);
 
-        const data =
-        await response.json();
+    const data =
+    await response.json();
 
-        if(data.length === 0){
-
-            container.innerHTML = `
-            <div class="surat">
-                <h3>💗</h3>
-                <p>
-                    Surat-surat untuk Kak Sasa
-                    sedang dikumpulkan 🌷
-                </p>
-            </div>
-            `;
-
-            return;
-        }
-
-        container.innerHTML = "";
-
-        data.reverse().forEach(item => {
-
-            container.innerHTML += `
-            <div class="surat">
-                <h3>💗 ${item.nama}</h3>
-                <p>${item.ucapan}</p>
-            </div>
-            `;
-
-        });
-
-    }catch(error){
+    if(data.length === 0){
 
         container.innerHTML = `
         <div class="surat">
-            <p>Gagal memuat surat 💔</p>
+            <h3>💗</h3>
+            <p>
+                Surat-surat untuk Kak Sasa
+                sedang dikumpulkan 🌷
+            </p>
         </div>
         `;
 
+        return;
     }
 
+    container.innerHTML = "";
+
+    data.reverse().forEach(item => {
+
+        container.innerHTML += `
+        <div class="surat">
+            <h3>💗 ${item.nama}</h3>
+            <p>${item.ucapan}</p>
+        </div>
+        `;
+
+    });
+
+}catch(error){
+
+    container.innerHTML = `
+    <div class="surat">
+        <p>Gagal memuat surat 💔</p>
+    </div>
+    `;
+
 }
+```
+
+}
+
 function createHeart(){
 
-    const heart =
-    document.createElement("div");
+```
+const heart =
+document.createElement("div");
 
-    heart.classList.add("heart");
+heart.classList.add("heart");
 
-    heart.innerHTML = "💗";
+heart.innerHTML = "💗";
 
-    heart.style.left =
-    Math.random() * 100 + "vw";
+heart.style.left =
+Math.random() * 100 + "vw";
 
-    heart.style.animationDuration =
-    (3 + Math.random() * 5) + "s";
+heart.style.fontSize =
+(15 + Math.random() * 20) + "px";
 
-    document
-    .querySelector(".hearts")
-    .appendChild(heart);
+heart.style.animationDuration =
+(3 + Math.random() * 5) + "s";
 
-    setTimeout(() => {
+document
+.querySelector(".hearts")
+.appendChild(heart);
 
-        heart.remove();
+setTimeout(() => {
 
-    }, 8000);
+    heart.remove();
+
+}, 8000);
+```
 
 }
 

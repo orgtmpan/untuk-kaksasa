@@ -124,11 +124,19 @@ setInterval(createHeart, 500);
 
 function bukaSurat(){
 
-```
-document
-.getElementById("suratRahasia")
-.classList.remove("hidden");
-```
+    document
+    .getElementById("suratRahasia")
+    .classList.remove("hidden");
+
+    document
+    .getElementById("btnSurat")
+    .style.display = "none";
+
+    document
+    .getElementById("suratRahasia")
+    .scrollIntoView({
+        behavior: "smooth"
+    });
 
 }
 

@@ -5,7 +5,12 @@ const API_URL =
 
 async function cekPassword(){
 
-```
+    alert("Tombol kepencet");
+
+    const input =
+    document.getElementById("password").value;
+
+
 const input =
 document.getElementById("password").value;
 
@@ -26,8 +31,8 @@ if(input === PASSWORD){
     "💗 Petunjuk: tanggal, bulan,tahun jadian.";
 
 }
-```
 
+```
 }
 
 async function loadSurat(){

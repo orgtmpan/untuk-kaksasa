@@ -121,10 +121,6 @@ function bukaSurat() {
     .classList.remove("hidden");
 
     document
-    .getElementById("btnSurat")
-    .style.display = "none";
-
-    document
     .getElementById("suratRahasia")
     .scrollIntoView({
         behavior: "smooth"

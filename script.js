@@ -171,3 +171,22 @@ function updateCountdown() {
 
 setInterval(updateCountdown, 1000);
 updateCountdown();
+
+const musicBtn = document.getElementById("musicBtn");
+const bgMusic = document.getElementById("bgMusic");
+
+if (musicBtn && bgMusic) {
+    musicBtn.addEventListener("click", async () => {
+        try {
+            if (bgMusic.paused) {
+                await bgMusic.play();
+                musicBtn.innerHTML = "⏸ Pause Music";
+            } else {
+                bgMusic.pause();
+                musicBtn.innerHTML = "🎵 About You";
+            }
+        } catch (err) {
+            console.error("Gagal memutar audio:", err);
+        }
+    });
+}
